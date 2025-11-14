@@ -1,65 +1,86 @@
-import Image from "next/image";
+'use client'
+
+import Image from 'next/image'
+import { Button } from "@/components/ui/button"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+  ItemGroup
+} from "@/components/ui/item"
+import { Folder, Share2, ShieldPlus } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className='bg-white dark:bg-black flex flex-col md:flex-row items-center justify-evenly min-h-screen' >
+      <div className="md:w-120 flex-col items-center justify-center space-y-2">
+        <div>
+          <p className='text-2xl font-light text-justify'><span className='text-[#E43651] font-semibold'>Drop Your Resume</span> is a free online storage platform to manage your Resume in one place.</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className='w-96'>
+          <ItemGroup>
+            <Item>
+              <ItemMedia variant="icon" className='bg-[#E43651]'>
+                <Folder strokeWidth={1} className='text-white' />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle className='text-[#E43651] font-semibold'>Upload your File</ItemTitle>
+                <ItemDescription className='font-light text-justify text-base leading-6' >
+                  Upload your resume easily by dragging and dropping your file in one place.
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+
+            <Item>
+              <ItemMedia variant="icon" className='bg-[#E43651]'>
+                <Share2 strokeWidth={1} className='text-white' />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle className='text-[#E43651] font-semibold'>Share to the World</ItemTitle>
+                <ItemDescription className='font-light text-justify text-base leading-6'>
+                  Each file uploaded contain a custom link and you can share your CV/Resume with anyone.
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+
+            <Item>
+              <ItemMedia variant="icon" className='bg-[#E43651]'>
+                <ShieldPlus strokeWidth={1} className='text-white' />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle className='text-[#E43651] font-semibold'>Secure and Private</ItemTitle>
+                <ItemDescription className='font-light text-justify text-base leading-6'>
+                  Your files are stored securely with encryption and privacy measures in place.
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+          </ItemGroup>
         </div>
-      </main>
+
+        <div className='justify-self-center-safe'>
+          <Link href="/upload">
+            <Button className="bg-[#E43651] text-white hover:bg-[#c32c43] focus:ring-4 focus:ring-red-300 font-light">
+              Get Started
+            </Button>
+          </Link>
+
+        </div>
+      </div>
+
+      <div className="md:w-1/2 flex items-center justify-center shrink-0">
+        <div>
+          <Image
+            src="/resume-vctr.svg"
+            alt="Hero Image"
+            width={700}
+            height={700}
+          />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
