@@ -1,7 +1,7 @@
 'use client';
 
-import React from "react"
 import { useState } from 'react';
+import { useParams } from 'next/navigation'
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { Button } from "@/components/ui/button";
@@ -15,8 +15,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     import.meta.url,
 ).toString();
 
-export default function ResumePage({ params }: { params: { cid: string } }) {
-    const { cid } = React.use(params);
+export default function ResumePage() {
+    const { cid } = useParams();
     const [numPages, setNumPages] = useState<number | null>(null);
     const [pageNumber, setPageNumber] = useState(1);
 

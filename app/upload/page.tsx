@@ -33,10 +33,11 @@ import { pinata } from "@/utils/config";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import Link from "next/link";
 
-import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from '@/contract/config';
 
 export default function Upload() {
+    const { address, isConnected } = useAccount()
     const [files, setFiles] = useState<File[] | undefined>();
     const [url, setUrl] = useState<string | null>(null);
     const [uploading, setUploading] = useState(false);
@@ -53,7 +54,7 @@ export default function Upload() {
 
     async function SubmitCID(cid: string) {
         writeContract({
-            address: CONTRACT_ADDRESS,
+            address: CONTRACT_ADDRESS as `0x${string}`,
             abi: CONTRACT_ABI,
             functionName: 'setResume',
             args: [cid],
@@ -133,9 +134,16 @@ export default function Upload() {
                     </form>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                    <Button onClick={() => { handleUpload() }} disabled={uploading || !files || files.length === 0 || isPending} className="w-full bg-[#E43651] text-white hover:bg-[#c32c43] focus:ring-4 focus:ring-red-300 font-light">
+                    {isConnected ? (
+                        <Button onClick={() => { handleUpload() }} disabled={ uploading || !files || files.length === 0 || isPending} className="w-full bg-[#E43651] text-white hover:bg-[#c32c43] focus:ring-4 focus:ring-red-300 font-light">
                         {uploading ? "Uploading..." : "Upload"}
                     </Button>
+                    ) : (
+
+                    <Button disabled={ true } className="w-full bg-[#E43651] text-white hover:bg-[#c32c43] focus:ring-4 focus:ring-red-300 font-light">
+                        {uploading ? "Uploading..." : "Upload"}
+                    </Button>
+                    )}
                 </CardFooter>
             </Card>
 
